@@ -11,22 +11,13 @@ $(document).ready(function () {
 	
 		//$(".ui-sortable",$html).removeClass("ui-sortable");
 		
-		var $currentHtml = $('<div>').append($("#preview-area").html());
-		
-		// .find() will now be able to search through all the markup you added
-		$currentHtml.find('.ui-sortable').removeClass("ui-sortable");
-		$currentHtml.find('.ui-sortable-handle').removeClass("ui-sortable-handle");
-		$currentHtml.find('.ui-droppable').removeClass("ui-droppable");
-		$currentHtml.find('.ui-draggable').removeClass("ui-draggable");
-		$currentHtml.find('.ui-draggable-handle').removeClass("ui-draggable-handle");
-		
-
 		
 		
 		
 		
-		console.log($currentHtml.html())
+		console.log(getContents())
 	})
+
 	
 	$(document).on("mouseenter","#preview-area .row",function(e){
 		e.stopPropagation();
@@ -45,11 +36,11 @@ $(document).ready(function () {
 	
 	$(window).on("scroll",function(){
 		sideMenu()
-	})
+	});
 	
 	$(window).on("resize",function(){
 		sideMenu()
-	})
+	});
 	
 	
 	
@@ -81,7 +72,7 @@ function getData(){
 		
 		
 		$("#content-area").jqotesub($("#template-content-area"), data);
-		$("#content-area .select2").select2();
+		
 		
 		
 		//$("#left-area").jqotesub($("#template-details"), data);
@@ -89,6 +80,8 @@ function getData(){
 		if ($.bbq.getState("section")){
 			$("#choose-side-content").val($.bbq.getState("section"))
 		}
+		$("#content-area .select2").select2();
+		
 		side_menu_content();
 		sideMenu();
 	})
@@ -104,12 +97,10 @@ function side_menu_content() {
 	if (section == "rows"){
 		var size = $.bbq.getState("size")||"sm";
 		
-		
-		
-		$("#side-bar-body").load("/admin/resources/rows?size="+size, function () {
-			$(window).trigger('resize');
-			setupDrag();
-		})
+		$("#side-bar-body").jqotesub($("#template-row-list"), {"size":size});
+			
+		setupDrag();
+		$(window).trigger('resize');
 	} else {
 		var typeID = "1";
 		
@@ -127,6 +118,18 @@ function side_menu_content() {
 	
 	
 }
+function getContents(){
+	var $currentHtml = $('<div>').append($("#preview-area").html());
+	
+	// .find() will now be able to search through all the markup you added
+	$currentHtml.find('.ui-sortable').removeClass("ui-sortable");
+	$currentHtml.find('.ui-sortable-handle').removeClass("ui-sortable-handle");
+	$currentHtml.find('.ui-droppable').removeClass("ui-droppable");
+	$currentHtml.find('.ui-draggable').removeClass("ui-draggable");
+	$currentHtml.find('.ui-draggable-handle').removeClass("ui-draggable-handle");
+	
+	return $currentHtml.html();
+}
 function sideMenu(){
 	var $rightArea = $("#right-area");
 	var $sideBar = $("#side-bar");
@@ -143,7 +146,7 @@ function sideMenu(){
 
 	sideBarHeight = Math.floor(sideBarHeight) - 3;
 	
-	console.log($sideBar.hasClass("affix")+" | offset:"+sideBarOffset+" | scroll:"+scroll+" | height:"+sideBarHeight)
+	//console.log($sideBar.hasClass("affix")+" | offset:"+sideBarOffset+" | scroll:"+scroll+" | height:"+sideBarHeight)
 	$sideBar.affix({
 		offset: {
 			top: 115
@@ -156,62 +159,6 @@ function sideMenu(){
 	
 }
 
-function sideMenuold(){
-	
-	var $sideBar = $("#right-area");
-	var w = $sideBar.width();
-	var h = $(window).height();
-	//$sideBar
-	
-	
-	var $panel = $("#right-area").find(".panel");
-	var headerANDfooter = $panel.find(".panel-heading").outerHeight() + $panel.find(".panel-footer").outerHeight();
-	
-	
-	var navbarANDtoolbar = $("#toolbar").outerHeight() + $("body > .navbar-fixed-top").outerHeight();
-	
-	var of = $("#toolbar").offset();
-	var of_ = of.top;
-	of = of.top + $("#toolbar").outerHeight();
-	
-	of = Math.floor(of);
-	of_ = Math.floor(of_);
-	
-	//console.info($("#content-area").offset())
-	
-	if ($("#toolbar").hasClass("fixed")){
-		
-	}
-	
-	var sc = $(window).scrollTop();
-	
-	var panelBodyHeight = h - (headerANDfooter + navbarANDtoolbar);
-	
-	panelBodyHeight = h - ((of + navbarANDtoolbar) - sc);
-	
-	var startOfFunky = (of - navbarANDtoolbar);
-	
-	if (sc > startOfFunky){
-		//panelBodyHeight =  h - navbarANDtoolbar - headerANDfooter;
-	}
-	
-	
-	
-	
-	
-	var nn = startOfFunky;
-	
-	
-	
-	//console.log("navbarToolbar: "+navbarANDtoolbar + " | toolbar bottom: " + of + " | toolbar off: " + + of_ + " | scroll: " +sc + " | -" + panelBodyHeight + "- | window h: " + h + " | test: " + nn + " | pHF: " + headerANDfooter);
-	
-	//panelBodyHeight = 365;
-	$('#sidebar').affix({
-		offset: {
-			top: 115 
-		}
-	}).css({width:w}).find(".panel-body").css({"height":panelBodyHeight,"overflow-y":"auto"});
-}
 function setupDrag(){
 	$(".content-area, #preview-area").sortable({
 		revert: 0,

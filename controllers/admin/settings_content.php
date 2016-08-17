@@ -37,6 +37,7 @@ class settings_content extends _ {
 				"title"=> "Admin | Settings | Content Types",
 			),
 		);
+		$tmpl->columns = $this->cfg['rows'];
 		$tmpl->input_types = $inputTypes;
 		$tmpl->output();
 	}

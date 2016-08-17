@@ -7,7 +7,7 @@ $cfg['DB']['database'] = "website-framework";
 $cfg['git'] = array(
 	'username'=>"",
 	"password"=>"",
-	"path"=>"github.com/WilliamStam/Website-Framework",
+	"path"=>"github.com/WilliamStam/WebsiteFramework",
 	"branch"=>"master"
 );
 

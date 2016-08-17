@@ -3,7 +3,7 @@
 
 <div class="clearfix"></div>
 
-<div class="panel panel-fixed">
+<div class="panel panel-fixed" style="margin-top:3px;">
 	<div class="panel-body">
 		<section class="row-preview" id="mockup-rows">
 			{% for key,row in columns %}
@@ -11,7 +11,7 @@
 				{% for columns in row %}
 					<div class="row" data-draggable='{% for cols in columns %}<div class="col-{{ size }}-{{ cols }} content-area"></div>{% endfor %}'>
 						{% for cols in columns %}
-							<div class="col-{{ size }}-{{ cols }}">{{ cols }}</div>
+							<div class="col-xs-{{ cols }}">{{ cols }}</div>
 						{% endfor %}
 					</div>
 				{% endfor %}
@@ -19,7 +19,7 @@
 		</section>
 		
 	</div>
-	<div class="panel-footer m-n p-n"  style="padding:0;">
+	<div class="panel-footer"  style="padding:0;">
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
 				<label class="btn btn-default {% if size=="xs" %}active{% endif %}">
 					<input type="radio" name="row-size-btns" autocomplete="off" value="xs" {% if size=="xs" %}checked="checked"{% endif %}>XS

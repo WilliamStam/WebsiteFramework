@@ -7,84 +7,9 @@
 			<div class="panel">
 				<div class="panel-body">
 					
-					<ul class="nav navbar-nav mega-menu ">
-						<li class="dropdown mega-menu-fullwidth">
-							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-bars"></i> Rows <i class="fa fa-caret-down"></i>
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="mega-menu-content disable-icons">
-										<div class="container">
-											<div class="row equal-height">
-												<div class="col-md-3 equal-height-in">
-													Rows
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown mega-menu-fullwidth">
-							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-paint-brush"></i> Fields <i class="fa fa-caret-down"></i>
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="mega-menu-content disable-icons">
-										<div class="container">
-											<div class="row equal-height">
-												<div class="col-md-3 equal-height-in">
-													Fields
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												</div>
-												<div class="col-md-3 equal-height-in">
-												
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-					
-					</ul>
-					
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav ">
 						<li>
-							<button class="btn btn-info" id="get-content" style="margin-right:40px;">get content
-							</button>
-						</li>
-						<li>
-							<button class="btn btn-default" type="button" id="scroll-down">
-								<i class="fa fa-arrow-down"></i>
-							</button>
-						
-						</li>
-						<li>
-							<button class="btn btn-default" type="button" id="scroll-up">
-								<i class="fa fa-arrow-up"></i>
-							</button>
-						</li>
-						<li class="divider-vertical" style="margin-left:20px;"></li>
-						<li>
-							<select name="edit-select" id="edit-select" class="select2">
+							<select name="edit-select" id="edit-select" class="select2" style="width:200px;">
 								<option value="">New Content Type</option>
 								<% if(this.records.length){ %>
 								<optgroup label="Existing Types">
@@ -99,6 +24,25 @@
 							</select>
 						</li>
 						<li class="divider-vertical" style="margin-left:20px;"></li>
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						
+						<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
+						<li>
+							<div class="btn-group">
+								<button class="btn btn-default" type="button" title="Undo change" data-toggle="tooltip" >
+									<i class="fa fa-undo"></i>
+								</button>
+							
+								<button class="btn btn-default" type="button" title="Redo last change" data-toggle="tooltip" >
+									<i class="fa fa-repeat"></i>
+								</button>
+							</div>
+						</li>
+						
+						
+						<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
 						
 						<li>
 							<button class="btn btn-default" type="button">Cancel</button>
@@ -170,16 +114,75 @@
 </script>
 <script type="text/x-jqote-template" id="template-inputs-list">
 	<![CDATA[
+	<div class="panel panel-fixed" style="margin-top:3px;">
+		<div class="panel-body">
+			<table class="table">
+				<tbody>
+				<% for (var i in this.records){ %>
+				<tr data-id="<%= this.records[i].ID %>">
+					<td><%= this.records[i].label %></td>
+				</tr>
+				<% } %>
+				</tbody>
+			</table>
+		
+		</div>
+		<div class="panel-footer"  style="padding:0;">
+			<button class="btn btn-default"><i class="fa fa-plus"></i> New Record</button>
+		</div>
+	</div>
 	
-	<table class="table">
-		<tbody>
-		<% for (var i in this.records){ %>
-		<tr data-id="<%= this.records[i].ID %>">
-			<td><%= this.records[i].label %></td>
-		</tr>
-		<% } %>
-		</tbody>
-	</table>
+	
+	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-row-list">
+	<![CDATA[
+	
+	
+	
+	<div class="clearfix"></div>
+	
+	<div class="panel panel-fixed" style="margin-top:3px;">
+		<div class="panel-body">
+			<section class="row-preview" id="mockup-rows" style="padding-bottom:20px;">
+				{% for key,row in columns %}
+					<h3>{{ key }}</h3>
+					{% for columns in row %}
+						<div class="row" data-draggable='{% for cols in columns %}<div class="col-<%= this.size %>-{{ cols }} content-area"></div>{% endfor %}'>
+							{% for cols in columns %}
+								<div class="col-xs-{{ cols }}">{{ cols }}</div>
+							{% endfor %}
+						</div>
+					{% endfor %}
+				{% endfor %}
+			</section>
+		
+		</div>
+		<div class="panel-footer"  style="padding:0;">
+			<div class="btn-group btn-group-justified" data-toggle="buttons">
+				<label class="btn <% if(this.size=="xs"){ %>btn-primary active<% } else { %>btn-default <% } %>">
+					<input type="radio" name="row-size-btns" autocomplete="off" value="xs" <% if(this.size=="xs"){ %>checked="checked"<% } %>>XS
+				</label>
+				<label class="btn <% if(this.size=="sm"){ %>btn-primary2 active<% } else { %>btn-default <% } %>">
+					<input type="radio" name="row-size-btns" autocomplete="off" value="sm" <% if(this.size=="sm"){ %>checked="checked"<% } %>>
+					SM
+				</label>
+				<label class="btn <% if(this.size=="md"){ %>btn-info active<% } else { %>btn-default <% } %>">
+					<input type="radio" name="row-size-btns" autocomplete="off" value="md" <% if(this.size=="md"){ %>checked="checked"<% } %>>
+					MD
+				</label>
+				<label class="btn <% if(this.size=="lg"){ %>btn-success active<% } else { %>btn-default <% } %>">
+					<input type="radio" name="row-size-btns" autocomplete="off" value="lg" <% if(this.size=="lg"){ %>checked="checked"<% } %>>
+					LG
+				</label>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
 	
 	
 	]]>
