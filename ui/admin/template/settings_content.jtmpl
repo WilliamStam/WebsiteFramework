@@ -1,0 +1,186 @@
+<script type="text/x-jqote-template" id="template-content-area">
+	<![CDATA[
+	
+	
+	<div id="toolbar" class="" style="top: 47px;">
+		<div class="container small-header">
+			<div class="panel">
+				<div class="panel-body">
+					
+					<ul class="nav navbar-nav mega-menu ">
+						<li class="dropdown mega-menu-fullwidth">
+							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-bars"></i> Rows <i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="mega-menu-content disable-icons">
+										<div class="container">
+											<div class="row equal-height">
+												<div class="col-md-3 equal-height-in">
+													Rows
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown mega-menu-fullwidth">
+							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-paint-brush"></i> Fields <i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="mega-menu-content disable-icons">
+										<div class="container">
+											<div class="row equal-height">
+												<div class="col-md-3 equal-height-in">
+													Fields
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												</div>
+												<div class="col-md-3 equal-height-in">
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+					
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<button class="btn btn-info" id="get-content" style="margin-right:40px;">get content
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-default" type="button" id="scroll-down">
+								<i class="fa fa-arrow-down"></i>
+							</button>
+						
+						</li>
+						<li>
+							<button class="btn btn-default" type="button" id="scroll-up">
+								<i class="fa fa-arrow-up"></i>
+							</button>
+						</li>
+						<li class="divider-vertical" style="margin-left:20px;"></li>
+						<li>
+							<select name="edit-select" id="edit-select" class="select2">
+								<option value="">New Content Type</option>
+								<% if(this.records.length){ %>
+								<optgroup label="Existing Types">
+									<% for(var i in this.records){ %>
+									<option value="<%= this.records[i].ID %>"
+									<% if(this.details.ID==this.records[i].ID){ %>selected="selected"<% } %>><%=
+									this.records[i].label %></option>
+									<% } %>
+								
+								</optgroup>
+								<% } %>
+							</select>
+						</li>
+						<li class="divider-vertical" style="margin-left:20px;"></li>
+						
+						<li>
+							<button class="btn btn-default" type="button">Cancel</button>
+							
+							<button class="btn btn-primary" type="button" style="padding: 6px 40px;">Save</button>
+						</li>
+					</ul>
+				
+				</div>
+			</div>
+		</div>
+	
+	
+	</div>
+	
+	<div id="content-start"></div>
+	
+	<div class="row">
+		<div class="animate-panel col-sm-8" id="form-area">
+			<%= $.jqote( $("#template-form-area"),this ) %>
+		</div>
+		
+		<div class="animate-panel col-sm-4" id="right-area">
+			<div id="side-bar">
+				<section id="side-bar-header">
+					<select name="choose-side-content" id="choose-side-content" class="select2" style="width:100%">
+						<option value="rows">Layout Rows</option>
+						<optgroup label="Inputs">
+							{% for row in input_types %}
+								<option value="input-{{ row['ID'] }}">{{ row['label'] }}</option>
+							{% endfor %}
+						</optgroup>
+					
+					</select>
+				</section>
+				
+				
+				<section id="side-bar-body">
+				
+				</section>
+			
+			
+			</div>
+		
+		</div>
+	</div>
+	]]>
+</script>
+
+
+<script type="text/x-jqote-template" id="template-form-area">
+	<![CDATA[
+	
+	<div class="panel">
+		<div class="panel-heading built">
+			<input type="text" class="form-control" id="label" placeholder="Content Type Label" value="<%= this.details.label %>">
+		</div>
+		<div class="panel-body" style="padding-top:0;">
+			
+			<section id="preview-area">
+				<%= this.details.content||'' %>
+			</section>
+		
+		</div>
+		<div class="panel-footer">footer</div>
+	</div>
+	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-inputs-list">
+	<![CDATA[
+	
+	<table class="table">
+		<tbody>
+		<% for (var i in this.records){ %>
+		<tr data-id="<%= this.records[i].ID %>">
+			<td><%= this.records[i].label %></td>
+		</tr>
+		<% } %>
+		</tbody>
+	</table>
+	
+	
+	]]>
+</script>

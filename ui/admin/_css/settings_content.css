@@ -1,0 +1,70 @@
+#side-bar {
+  position: static; }
+
+#side-bar-body {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto; }
+
+#side-bar.affix-top {
+  position: static; }
+  #side-bar.affix-top #side-bar-body {
+    margin-left: 15px;
+    margin-right: 15px; }
+
+#side-bar.affix {
+  position: fixed;
+  top: 84px; }
+
+#preview-area {
+  min-height: 200px;
+  position: relative; }
+  #preview-area:empty:before {
+    content: 'Drag a few rows here to start';
+    position: absolute;
+    display: block;
+    top: 50%;
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  #preview-area .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: move; }
+    #preview-area .row .content-area .row:last-child {
+      padding-bottom: 10px; }
+    #preview-area .row.hover {
+      background-color: #f1e9d0; }
+  #preview-area div.content-area {
+    min-height: 30px;
+    cursor: default;
+    border: 1px dotted #b9b9b9; }
+    #preview-area div.content-area .row {
+      margin-left: 10px;
+      margin-right: 10px; }
+    #preview-area div.content-area.hover {
+      background-color: #c5e1cf; }
+
+.ui-placeholder-class {
+  background-color: #f1f1f1;
+  border: 1px dashed #ccc;
+  height: 15px; }
+
+.ui-drag-row {
+  width: 300px;
+  background-color: rgba(100, 100, 100, 0.2);
+  text-align: center;
+  border: 1px dashed #b4b4b4;
+  padding: 5px 0;
+  font-size: 10px;
+  cursor: move; }
+
+.ui-drag-row.hover {
+  opacity: 0.7; }

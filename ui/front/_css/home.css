@@ -1,0 +1,11 @@
+:-webkit-full-screen a {
+  display: flex; }
+:-moz-full-screen a {
+  display: flex; }
+:-ms-fullscreen a {
+  display: -ms-flexbox;
+  display: flex; }
+:fullscreen a {
+  display: -ms-flexbox;
+  display: flex; }
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsY0FBYyxFQUFFO0FBRGxCO0VBQ0UsY0FBYyxFQUFFO0FBRGxCO0VBQ0UscUJBQWM7RUFBZCxjQUFjLEVBQUU7QUFEbEI7RUFDRSxxQkFBYztFQUFkLGNBQWMsRUFBRSIsImZpbGUiOiJob21lLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIjpmdWxsc2NyZWVuIGEge1xuICBkaXNwbGF5OiBmbGV4OyB9XG4iXX0= */

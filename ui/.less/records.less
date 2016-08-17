@@ -1,0 +1,51 @@
+#pagination {
+  padding:0;
+  margin:0;
+  nav {
+	padding:0;
+	margin:0;
+  }
+  .pagination {
+	margin:0;
+	padding:0;
+  }
+  .pagination-sm {
+	margin:5px 0 0 0;
+  }
+  #pagination-info {
+	line-height: 40px;
+  }
+}
+
+
+.no-records {
+  padding      : 30px !important;
+  text-align   : center !important;
+  margin-right : 20px !important;
+  border       : none !important;
+}
+.record {
+  .progress {
+	background:none;
+	box-shadow:none;
+  }
+}
+.records {
+  tbody {
+	tr.record {
+	  cursor : pointer;
+	  &.active {
+		td {
+		  color:#fff;
+		  background-color: #a10f2b;
+		}
+	  }
+	  &:hover {
+		td {
+		  background-color: #b61332;
+		  color:#fff;
+		}
+	  }
+	}
+  }
+}

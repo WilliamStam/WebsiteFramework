@@ -1,0 +1,44 @@
+.normalheader {
+	margin-bottom : 15px;
+
+}
+
+
+.panel-fixed {
+	position : absolute;
+	top      : 0;
+	right    : 0;
+	left     : 0;
+	bottom   : 0;
+	margin-bottom:0;
+	padding-bottom: 0;
+	> .panel-heading {
+		position   : absolute;
+		top        : 0;
+		left       : 0;
+		right      : 0;
+	}
+	> .panel-body {
+		position   : absolute;
+		top        : 0;
+		left       : 0;
+		right      : 0;
+		bottom     : 0;
+		overflow-y : auto;
+	}
+	> .panel-footer {
+		position   : absolute;
+		left       : 0;
+		right      : 0;
+		bottom     : 0;
+	}
+
+}
+#toolbar {
+	.panel-body {
+		padding:10px 20px ;
+	}
+}
+.panel-group {
+	border:1px solid #e4e5e7;
+}
