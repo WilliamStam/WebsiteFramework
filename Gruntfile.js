@@ -4,7 +4,7 @@ var jsfile = [
 	'vendor/twbs/bootstrap-sass/assets/javascripts/bootstrap.min.js' ,
 //	'vendor/components/jquery-hotkeys/jquery.hotkeys.js',
 //	'vendor/components/jquery-mousewheel/jquery.mousewheel.js',
-//	'vendor/components/TouchSwipe-Jquery-Plugin/jquery.touchSwipe.js',
+	'vendor/components/nicescroll/jquery.nicescroll.js',
 	'vendor/components/jQote2/jquery.jqote2.js',
 	'vendor/timrwood/moment/moment.js',
 //	'vendor/components/hideseek/jquery.hideseek.min.js',

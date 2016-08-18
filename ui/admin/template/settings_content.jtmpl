@@ -61,11 +61,11 @@
 	<div id="content-start"></div>
 	
 	<div class="row">
-		<div class="animate-panel col-sm-8" id="form-area">
+		<div class="animate-panel col-sm-8 col-lg-9" id="form-area">
 			<%= $.jqote( $("#template-form-area"),this ) %>
 		</div>
 		
-		<div class="animate-panel col-sm-4" id="right-area">
+		<div class="animate-panel col-sm-4 col-lg-3" id="right-area">
 			<div id="side-bar">
 				<section id="side-bar-header">
 					<select name="choose-side-content" id="choose-side-content" class="select2" style="width:100%">
@@ -144,7 +144,7 @@
 	<div class="clearfix"></div>
 	
 	<div class="panel panel-fixed" style="margin-top:3px;">
-		<div class="panel-body">
+		<div class="panel-body nicescroll">
 			<section class="row-preview" id="mockup-rows" style="padding-bottom:20px;">
 				{% for key,row in columns %}
 					<h3>{{ key }}</h3>

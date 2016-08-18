@@ -25,7 +25,10 @@ function resize() {
 		var $this = $(this);
 		var h = $this.find("> .panel-heading").outerHeight();
 		var f = $this.find("> .panel-footer").outerHeight();
-		$this.find(".panel-body").css({top:h,bottom:f});
+		var $body = $this.find(".panel-body");
+		$body.css({top:h,bottom:f});
+		
+		
 		//	console.log(h)
 	});
 }
@@ -41,7 +44,9 @@ function scroll(){
 		var toolbarheight = $toolbar.outerHeight();
 		var scrollTop = $(window).scrollTop();
 		
-		var contentOffset = $("#content-start").offset().top;
+		$nextElement = $toolbar.next();
+		
+		var contentOffset = $nextElement.offset().top;
 		
 		var toolboxtopscroll = (contentOffset - toolbarheight)-15
 		
@@ -49,10 +54,10 @@ function scroll(){
 		
 		if ((scrollTop > (toolboxtopscroll - navbarheight))&& ww > 768){
 			$toolbar.addClass("fixed").css({"top":navbarheight - 1});
-			$("#content-start").css({"margin-top":$toolbar.outerHeight()+31});
+			$nextElement.css({"margin-top":$toolbar.outerHeight()+31});
 		} else {
 			$toolbar.removeClass("fixed");
-			$("#content-start").css({"margin-top":0});
+			$nextElement.css({"margin-top":0});
 		}
 		
 	}

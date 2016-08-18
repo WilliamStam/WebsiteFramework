@@ -116,7 +116,7 @@ $(window).scroll(function() {
 	
 });
 $(window).resize(function() {
-	
+	nicescrollInit()
 });
 
 $(document).ready(function () {
@@ -139,6 +139,7 @@ function ajaxRequestLoading(){
 
 window.onerror = function() {
 	$('#loadingmask').stop(true,true).fadeOut(500);
+	nicescrollInit()
 }
 
 
@@ -160,12 +161,25 @@ $(document).ajaxComplete(function(event, request, settings) {
 		ajaxRequests = ajaxRequests-1;
 		ajaxRequestLoading();
 	}
-	
+	nicescrollInit();
 	
 });
 
+function nicescrollInit(){
+	$(".nicescroll").each(function(){
+		var $this = $(this);
+		$this.niceScroll({
+			cursorcolor:"#999",
+			cursoropacitymin:0.4
+		});
+	})
+	
+}
+
+
 ;$(document).ready(function () {
 	
+	nicescrollInit();
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 	

@@ -98,7 +98,7 @@ function side_menu_content() {
 		var size = $.bbq.getState("size")||"sm";
 		
 		$("#side-bar-body").jqotesub($("#template-row-list"), {"size":size});
-			
+		
 		setupDrag();
 		$(window).trigger('resize');
 	} else {
@@ -138,18 +138,18 @@ function sideMenu(){
 	var w = $sideBar.width();
 	var h = $(window).height();
 	var scroll = $(window).scrollTop();
-	var sideBarOffset =  Math.floor($sideBar.offset().top);
+	var sideBarOffset =  Math.round($sideBar.offset().top);
 	var sideBarHeight = h;
 	
 	
 	sideBarHeight = ((h - sideBarOffset) + scroll);
 
-	sideBarHeight = Math.floor(sideBarHeight) - 3;
+	sideBarHeight = Math.round(sideBarHeight) - 3;
 	
 	//console.log($sideBar.hasClass("affix")+" | offset:"+sideBarOffset+" | scroll:"+scroll+" | height:"+sideBarHeight)
 	$sideBar.affix({
 		offset: {
-			top: 115
+			top: 118
 		}
 	}).css({width:w,height:sideBarHeight});
 	

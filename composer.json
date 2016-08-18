@@ -121,6 +121,18 @@
           "reference": "origin/master"
         }
       }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "components/nicescroll",
+        "version": "dev-master",
+        "source": {
+          "url": "https://github.com/inuyaksa/jquery.nicescroll",
+          "type": "git",
+          "reference": "origin/master"
+        }
+      }
     }
   ],
   "require": {
@@ -142,6 +154,7 @@
     "ckeditor/ckeditor": "4.*",
     "components/daterangepicker":"dev-master",
     "components/HideSeek":"dev-master",
-    "components/toastr":"dev-master"
+    "components/toastr":"dev-master",
+    "components/nicescroll":"dev-master"
   }
 }
