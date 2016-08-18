@@ -177,7 +177,7 @@ function sideMenu() {
 	
 	sideBarHeight = ((h - sideBarOffset) + scroll);
 	
-	sideBarHeight = Math.round(sideBarHeight) - 3;
+	sideBarHeight = Math.round(sideBarHeight) - 10;
 	
 	//console.log($sideBar.hasClass("affix")+" | offset:"+sideBarOffset+" | scroll:"+scroll+" | height:"+sideBarHeight)
 	$sideBar.affix({
