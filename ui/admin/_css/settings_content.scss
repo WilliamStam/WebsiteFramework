@@ -129,3 +129,16 @@ overflow-y:auto;
 		}
 	}
 }
+
+.panel-body.has-error {
+	border-color:red;
+}
+
+.form-group {
+	&.panel-heading {
+		margin:0;
+	}
+	&.panel-body {
+		margin:0;
+	}
+}

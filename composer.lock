@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "03621958e19d4eb56c8e6c80d14049ae",
-    "content-hash": "594965cb8822bdacf71d7753d6708d9b",
+    "hash": "ee69df7c6e560b957416e01636de6287",
+    "content-hash": "6deaf52762ed7865e268b1beb4d2248f",
     "packages": [
         {
             "name": "bcosca/fatfree",
@@ -78,6 +78,17 @@
                 "wysiwyg"
             ],
             "time": "2016-07-13 13:57:11"
+        },
+        {
+            "name": "codemirror/CodeMirror",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codemirror/CodeMirror",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "time": "2016-08-17 14:36:28"
         },
         {
             "name": "components/HideSeek",
@@ -839,7 +850,8 @@
         "components/daterangepicker": 20,
         "components/hideseek": 20,
         "components/toastr": 20,
-        "components/nicescroll": 20
+        "components/nicescroll": 20,
+        "codemirror/codemirror": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

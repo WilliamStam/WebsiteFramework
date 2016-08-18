@@ -166,6 +166,7 @@ $(document).ajaxComplete(function(event, request, settings) {
 });
 
 function nicescrollInit(){
+	/*
 	$(".nicescroll").each(function(){
 		var $this = $(this);
 		$this.niceScroll({
@@ -173,7 +174,7 @@ function nicescrollInit(){
 			cursoropacitymin:0.4
 		});
 	})
-	
+	*/
 }
 
 
@@ -332,6 +333,10 @@ function validationErrors(data, $form) {
 
 
 		});
+		
+	
+		
+		
 		$("button[type='submit']", $form).addClass("btn-danger").html("(" + i + ") Error(s) Found");
 		
 			if (i>1){

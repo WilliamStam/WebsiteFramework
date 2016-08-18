@@ -9,7 +9,7 @@
 					
 					<ul class="nav navbar-nav ">
 						<li>
-							<select name="edit-select" id="edit-select" class="select2" style="width:200px;">
+							<select name="edit-select" id="edit-select" class="select2" style="width:400px;">
 								<option value="">New Content Type</option>
 								<% if(this.records.length){ %>
 								<optgroup label="Existing Types">
@@ -24,6 +24,7 @@
 							</select>
 						</li>
 						<li class="divider-vertical" style="margin-left:20px;"></li>
+						<li><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></li>
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">
@@ -45,9 +46,9 @@
 						<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
 						
 						<li>
-							<button class="btn btn-default" type="button">Cancel</button>
+							<button class="btn btn-default" type="reset">Cancel</button>
 							
-							<button class="btn btn-primary" type="button" style="padding: 6px 40px;">Save</button>
+							<button class="btn btn-primary" type="submit" style="padding: 6px 40px;">Save</button>
 						</li>
 					</ul>
 				
@@ -97,15 +98,16 @@
 	<![CDATA[
 	
 	<div class="panel">
-		<div class="panel-heading built">
-			<input type="text" class="form-control" id="label" placeholder="Content Type Label" value="<%= this.details.label %>">
+		<div class="panel-heading built form-group">
+			<input type="text" class="form-control" id="label" name="label"  placeholder="Content Type Label" value="<%= this.details.label %>">
 		</div>
-		<div class="panel-body" style="padding-top:0;">
+		<div class="panel-body form-group" style="padding-top:0;">
 			
+			<div id="template">
 			<section id="preview-area">
 				<%= this.details.content||'' %>
 			</section>
-		
+			</div>
 		</div>
 		<div class="panel-footer">footer</div>
 	</div>
@@ -149,7 +151,7 @@
 				{% for key,row in columns %}
 					<h3>{{ key }}</h3>
 					{% for columns in row %}
-						<div class="row" data-draggable='{% for cols in columns %}<div class="col-<%= this.size %>-{{ cols }} content-area"></div>{% endfor %}'>
+						<div class="row" data-draggable='{% for cols in columns %}&#13;&#10;&#09;<div class="col-<%= this.size %>-{{ cols }} content-area"></div>{% endfor %}&#13;&#10;'>
 							{% for cols in columns %}
 								<div class="col-xs-{{ cols }}">{{ cols }}</div>
 							{% endfor %}
@@ -181,6 +183,34 @@
 	</div>
 	
 	
+	
+	
+	
+	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-modal-row-dbl-click">
+	<![CDATA[
+	
+	
+	<form action="#" id="form-row-edit">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Row Edit</h4>
+			</div>
+			<div class="modal-body" style="padding:10px;">
+				
+				<textarea name="row-edit-field" id="row-edit-field" cols="30" rows="10" class="form-control"><%= this.row %></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</form>
 	
 	
 	

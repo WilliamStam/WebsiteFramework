@@ -36,6 +36,8 @@ class settings_content extends _ {
 			"meta"       => array(
 				"title"=> "Admin | Settings | Content Types",
 			),
+				"js"=>array("/vendor/codemirror/CodeMirror/lib/codemirror.js","/vendor/codemirror/CodeMirror/mode/xml/xml.js","/vendor/codemirror/CodeMirror/mode/htmlmixed/htmlmixed.js"),
+				"css"=>array("/vendor/codemirror/CodeMirror/lib/codemirror.css")
 		);
 		$tmpl->columns = $this->cfg['rows'];
 		$tmpl->input_types = $inputTypes;
