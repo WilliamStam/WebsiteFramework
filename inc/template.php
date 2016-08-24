@@ -59,6 +59,9 @@ class template {
 		$this->vars['_folder'] = $this->vars['folder'];
 
 		$this->vars['_domain'] = "//".$_SERVER['HTTP_HOST'];
+		
+		
+		$this->vars['_content_types'] = models\content_types::getInstance()->getAll();
 
 
 		

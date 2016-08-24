@@ -15,7 +15,7 @@ class input extends \resources\_ {
 	}
 	static function _def(){
 		return array(
-				"ID"=>"text",
+				"type"=>"text",
 				"label"=>"Text Input"
 		);
 	}

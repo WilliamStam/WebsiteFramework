@@ -50,13 +50,14 @@ $(document).ready(function () {
 	
 	
 	
-	$(document).on("mouseenter", "#preview-area .row", function (e) {
-		//e.stopPropagation();
+	$(document).on("mouseover", "#preview-area .row", function (e) {
+		e.stopPropagation();
 		$("#preview-area .hover").removeClass("hover");
 		//console.log($(e.currentTarget))
 		$($(this).get(0)).addClass("hover");
 	});
 	$(document).on("mouseleave", "#preview-area .row", function () {
+		//$($(this).get(0)).removeClass("hover");
 		$("#preview-area .hover").removeClass("hover");
 	});
 	
@@ -162,6 +163,20 @@ function getContents($currentHtml) {
 	$currentHtml.find('.ui-draggable').removeClass("ui-draggable");
 	$currentHtml.find('.ui-draggable-handle').removeClass("ui-draggable-handle");
 	
+	$(".content-block",$currentHtml).each(function(){
+		var $this = $(this);
+		
+		var attr = $this.attr('data-id');
+		if (typeof attr !== typeof undefined && attr !== false) {
+			$this.removeAttr("style").html("");
+		} else {
+			$this.remove();
+		}
+		
+		
+	})
+	
+	
 	return $currentHtml.html();
 }
 function sideMenu() {
@@ -187,12 +202,16 @@ function sideMenu() {
 	}).css({width: w, height: sideBarHeight});
 	
 	$sideBarBody.css("top", $("#side-bar-header").outerHeight())
-	
 	//$sideBarContent.css({"height":panelBodyHeight,"overflow-y":"auto"});
 	
 }
-
+var t = 0;
 function setupDrag() {
+	console.log(t++)
+	$("#preview-area .content-block").each(function(){
+		setupContentBlock($(this))
+	})
+	
 	$(".content-area, #preview-area").sortable({
 		revert: 0, 
 		tolerance: "pointer", 
@@ -200,24 +219,29 @@ function setupDrag() {
 		receive: function (event, ui) {
 			ui.helper.first().removeAttr('style'); // undo styling set by jqueryUI
 		}
-	}).bind('sortstop', function (event, ui) {
+	}).off('sortstop').one('sortstop', function (event, ui) {
+		event.stopPropagation();
 		var $item = $(ui.item);
 		var decoded = $item.attr("data-draggable");
 		if (decoded) {
 			$item.html(decoded).removeAttr("data-draggable");
 		}
-		
+		//console.log($item)
 		$item = cleanupDrag($item);
 		
-		setupDrag()
+		setupDrag();
 		
 		return $item;
 	});
 	
-	$("#mockup-rows > .row, #preview-area .row").draggable({
+	$("#mockup-rows > .row, #preview-area .row, .content-block").draggable({
 		connectToSortable: ".content-area, #preview-area", 
 		revert: "invalid", 
-		addClasses: false, 
+		addClasses: false,
+		//snapMode: "inner",
+		//snap: ".content-area",
+		stack: ".draggable",
+		zIndex: 10000,
 		helper: function (ui) {
 			//console.log($(ui.currentTarget).closest("#preview-area").length)
 			
@@ -230,10 +254,11 @@ function setupDrag() {
 				$drag.find("*").removeData("ui-sortable");
 			}
 			
+			
+			
 			$drag.addClass("ui-drag-row");
 			
 			return $drag;
-			
 		}, 
 		create: function () {
 			//	console.log("drag create");	
@@ -243,10 +268,37 @@ function setupDrag() {
 		}, 
 		stop: function () {
 			cleanupDrag($(this));
-		}, 
+		},
 		appendTo: "body"
 		
 	});
+	
+	$("#right-area").droppable({
+		tolerance: "pointer",
+		over: function( event, ui ) {
+			$(this).addClass("hover")
+		},
+		out: function( event, ui ) {
+			$(this).removeClass("hover")
+		},
+		drop: function( event, ui ) {
+			console.log(ui)
+			$(this).removeClass("hover")
+			
+			if ($(ui.draggable).closest("#preview-area")) {
+				
+				
+				if (confirm("Really remove this item?")){
+					$(ui.helper).remove();
+				}
+				
+			}
+		}
+	})
+	
+	
+	
+	
 	
 }
 function cleanupDrag($item) {
@@ -257,5 +309,12 @@ function cleanupDrag($item) {
 	$item.removeClass("ui-draggable-dragging");
 	$item.removeClass("ui-sortable-helper");
 	$item.removeClass("ui-drag-row");
+	
+	return $item;
+}
+
+function setupContentBlock($item){
+	//console.log($item)
+	$item.html(""+$item.attr("data-label")+""+"<span class='badge'>"+$item.attr("data-type")+"</span>");
 	return $item;
 }

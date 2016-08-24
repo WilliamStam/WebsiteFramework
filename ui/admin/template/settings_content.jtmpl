@@ -73,7 +73,7 @@
 						<option value="rows">Layout Rows</option>
 						<optgroup label="Inputs">
 							{% for row in input_types %}
-								<option value="input-{{ row['ID'] }}">{{ row['label'] }}</option>
+								<option value="input-{{ row['type'] }}">{{ row['label'] }}</option>
 							{% endfor %}
 						</optgroup>
 					
@@ -117,16 +117,15 @@
 <script type="text/x-jqote-template" id="template-inputs-list">
 	<![CDATA[
 	<div class="panel panel-fixed" style="margin-top:3px;">
-		<div class="panel-body">
-			<table class="table">
-				<tbody>
+		<div class="panel-body p-n">
+			<section class="list-group" id="input-list-records" >
 				<% for (var i in this.records){ %>
-				<tr data-id="<%= this.records[i].ID %>">
-					<td><%= this.records[i].label %></td>
-				</tr>
+				<div  class="content-block" data-id="<%= this.records[i].ID %>" data-type="<%= this.type %>"  data-label="<%= this.records[i].label %>" >
+					<%= this.records[i].label %>
+				</div>
 				<% } %>
-				</tbody>
-			</table>
+			</section>
+			
 		
 		</div>
 		<div class="panel-footer"  style="padding:0;">

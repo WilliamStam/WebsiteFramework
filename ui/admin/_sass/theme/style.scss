@@ -24,7 +24,7 @@ $main-transition: all 0.1s ease-out 0s;
 
 
 // Import all styles
-@import "margins";
+
 @import "alerts";
 @import "modal";
 @import "progress_bar";
@@ -56,3 +56,4 @@ $main-transition: all 0.1s ease-out 0s;
 
 // Styles for landing page
 //@import "landing";
+@import "margins";

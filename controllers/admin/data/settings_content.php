@@ -34,19 +34,32 @@ class settings_content extends _ {
 			$input = substr($input, strlen($prefix));
 		}
 		
+		$listO = "\\resources\\admin\\inputs\\{$input}\\input";
+		
+		
+		
 		$result = array(
 				"type"=>$type,
-				"input"=>$input,
+				"label"=>"",
 				"records"=>Array()
 		);
 		
-		$listO = "\\resources\\admin\\inputs\\{$input}\\input";
+		
 		if (class_exists($listO)){
+			
+			$result = $listO::_def();
+			
 			$listO = $listO."::_list";
 			$list = $listO();
-			$result['records'] = $list;
+			//test_array($list); 
+			foreach ($list as $item){
+				
+				$result['records'][] = $item;
+			}
+			
+			
+			
 		}
-		
 		
 		
 		

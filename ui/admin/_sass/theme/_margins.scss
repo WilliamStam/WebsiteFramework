@@ -1,5 +1,10 @@
 /* MARGINS & PADDINGS */
-
+.p-0 {
+  padding:0 !important;
+}
+.p-n {
+  padding:0 !important;
+}
 .p-xxs {
   padding: 5px !important;
 }
@@ -49,7 +54,7 @@
 .m-xl {
   margin: 50px;
 }
-.m-n {
+.m-n, .m-0 {
   margin: 0 !important;
 }
 .m-l-none {
