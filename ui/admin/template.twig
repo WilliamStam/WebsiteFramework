@@ -16,8 +16,8 @@
 	
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	
-	<link rel="stylesheet" href="/ui/base.{{ _v }}.css">
-	<link rel="stylesheet" href="/ui/admin/base.{{ _v }}.css">
+	<link rel="stylesheet" href="/ui/style.{{ _v }}.css">
+	<link rel="stylesheet" href="/ui/admin/_style.{{ _v }}.css">
 	{% for row in page['css'] %}
 		<link rel="stylesheet" href="{{ row }}">
 	{% endfor %}
@@ -41,8 +41,8 @@
 	{% include "_footer.twig" ignore missing  %}
 
 
-<script src="/ui/base.{{ _v }}.js"></script>
-<script src="/ui/admin/base.{{ _v }}.js"></script>
+<script src="/ui/javascript.{{ _v }}.js"></script>
+<script src="/ui/admin/_javascript.{{ _v }}.js"></script>
 
 
 {% for row in page['js'] %}
@@ -98,8 +98,11 @@
 <div class="loadingmask fa" id="loadingmask" >
 	<i class="fa fa-cog fa-spin"></i>
 </div>
-
-
+	
+	
+	<div id="system-timer-btn" >
+		<a href="#systemTimers-container" data-toggle="modal"><i class="fa fa-clock-o"></i></a>
+	</div>
 <!--
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

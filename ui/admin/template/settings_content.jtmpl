@@ -2,58 +2,48 @@
 	<![CDATA[
 	
 	
-	<div id="toolbar" class="" style="top: 47px;">
-		<div class="container small-header">
-			<div class="panel">
-				<div class="panel-body">
-					
-					<ul class="nav navbar-nav ">
-						<li>
-							<select name="edit-select" id="edit-select" class="select2" style="width:400px;">
-								<option value="">New Content Type</option>
-								<% if(this.records.length){ %>
-								<optgroup label="Existing Types">
-									<% for(var i in this.records){ %>
-									<option value="<%= this.records[i].ID %>"
-									<% if(this.details.ID==this.records[i].ID){ %>selected="selected"<% } %>><%=
-									this.records[i].label %></option>
-									<% } %>
-								
-								</optgroup>
-								<% } %>
-							</select>
-						</li>
-						<li class="divider-vertical" style="margin-left:20px;"></li>
-						<li><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></li>
-					</ul>
-					
-					<ul class="nav navbar-nav navbar-right">
-						
-						<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
-						<li>
-							<div class="btn-group">
-								<button class="btn btn-default" type="button" title="Undo change" data-toggle="tooltip" >
-									<i class="fa fa-undo"></i>
-								</button>
-							
-								<button class="btn btn-default" type="button" title="Redo last change" data-toggle="tooltip" >
-									<i class="fa fa-repeat"></i>
-								</button>
-							</div>
-						</li>
-						
-						
-						<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
-						
-						<li>
-							<button class="btn btn-default" type="reset">Cancel</button>
-							
-							<button class="btn btn-primary" type="submit" style="padding: 6px 40px;">Save</button>
-						</li>
-					</ul>
+	<div id="toolbar" class="toolbar-tabs" style="top: 47px;">
+		<div class="container">
+			<ul class="nav nav-tabs navbar-nav " role="tablist" id="content-type-tabs" >
+				<li role="presentation" class="active"><a href="#content-meta" aria-controls="content-meta" role="tab" data-toggle="tab">Settings <small>(Meta)</small></a></li>
+				<li role="presentation"><a href="#content-content" aria-controls="content-content" role="tab" data-toggle="tab">Content</a></li>
+				<li role="presentation"><a href="#content-styles" aria-controls="content-styles" role="tab" data-toggle="tab">Styles</a></li>
+				<li role="presentation"><a href="#content-javascript" aria-controls="content-javascript" role="tab" data-toggle="tab">Javascript</a></li>
+			</ul>
+			
+			
+			
+			
+			
+			<ul class="nav navbar-nav navbar-right navbar-btns">
 				
-				</div>
-			</div>
+				
+				<!--
+				<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
+				<li>
+					<div class="btn-group">
+						<button class="btn btn-default" type="button" title="Undo change" data-toggle="tooltip" >
+							<i class="fa fa-undo"></i>
+						</button>
+					
+						<button class="btn btn-default" type="button" title="Redo last change" data-toggle="tooltip" >
+							<i class="fa fa-repeat"></i>
+						</button>
+					</div>
+				</li>
+				-->
+				<% if (this.details.ID){ %>
+				<li><button type="button" class="btn" id="remove-content-type-btn" ><i class="fa fa-trash"></i></button></li>
+				<% } %>
+				<li class="divider-vertical" style="margin-left:20px;margin-right:20px;"></li>
+				
+				<li>
+					<button class="btn btn-default" type="reset">Cancel</button>
+					
+					<button class="btn btn-primary" type="submit" style="padding: 6px 40px;">Save</button>
+				</li>
+			</ul>
+			
 		</div>
 	
 	
@@ -71,7 +61,8 @@
 				<section id="side-bar-header">
 					<select name="choose-side-content" id="choose-side-content" class="select2" style="width:100%">
 						<option value="rows">Layout Rows</option>
-						<optgroup label="Inputs">
+						<option value="panels">Panels</option>
+						<optgroup label="Resources">
 							{% for row in input_types %}
 								<option value="input-{{ row['type'] }}">{{ row['label'] }}</option>
 							{% endfor %}
@@ -97,20 +88,77 @@
 <script type="text/x-jqote-template" id="template-form-area">
 	<![CDATA[
 	
-	<div class="panel">
-		<div class="panel-heading built form-group">
-			<input type="text" class="form-control" id="label" name="label"  placeholder="Content Type Label" value="<%= this.details.label %>">
-		</div>
-		<div class="panel-body form-group" style="padding-top:0;">
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active form-horizontal" id="content-meta">
 			
-			<div id="template">
-			<section id="preview-area">
-				<%= this.details.content||'' %>
-			</section>
+			<div class="panel">
+				
+				<div class="panel-body">
+					<div class="form-group">
+						<label for="label" class="col-sm-2 control-label">Label</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="label" name="label"  placeholder="Content Type Label" value="<%= this.details.label %>">
+						</div>
+					</div>
+				</div>
 			</div>
+			
+			 
+		
 		</div>
-		<div class="panel-footer">footer</div>
+		<div role="tabpanel" class="tab-pane " id="content-content">
+			
+				
+				<div class="form-group" style="padding-top:0;">
+					
+					<div id="template">
+						<section id="preview-area">
+							<%= this.details.content||'' %>
+						</section>
+					</div>
+				</div>
+				
+					<div id="carousel-info-box" class="carousel tips slide" data-ride="carousel">
+						<!-- Indicators -->
+						
+						
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<i class="fa fa-info-circle"></i> To remove a row or content block drag and drop it onto the "list" column on the right
+							</div>
+							<div class="item">
+								<i class="fa fa-info-circle"></i> Chooose the breakpoint at the bottom of the layout rows list for mobile breakpoints
+							</div>
+							
+						</div>
+						
+						<!-- Controls -->
+						<a class="left carousel-control" href="#carousel-info-box" role="button" data-slide="prev">
+							<span class="fa fa-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-info-box" role="button" data-slide="next">
+							<span class="fa fa-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+					
+					<div class="clearfix"></div>
+					
+					
+					
+			
+			
+		</div>
+		<div role="tabpanel" class="tab-pane" id="content-styles">...</div>
+		<div role="tabpanel" class="tab-pane" id="content-javascript">...</div>
 	</div>
+	
+	
+	
+	
+	
 	
 	]]>
 </script>
@@ -120,16 +168,59 @@
 		<div class="panel-body p-n">
 			<section class="list-group" id="input-list-records" >
 				<% for (var i in this.records){ %>
-				<div  class="content-block" data-id="<%= this.records[i].ID %>" data-type="<%= this.type %>"  data-label="<%= this.records[i].label %>" >
-					<%= this.records[i].label %>
+				<div  class="input-item" data-id="<%= this.records[i].ID %>" data-type="<%= this.type %>" data-name="<%= this.records[i].name %>" data-description="<%= this.records[i].description %>" >
+					<div class="row">
+						<% if(this.records[i].module!="html"){ %>
+						<div class="col-xs-4 text-right">
+							<% if(Number(parseFloat(this.records[i].ID))!=this.records[i].ID){ %>
+							<i class="fa fa-lock pull-left"></i>
+							<% } %>
+							<em><%= this.records[i].name %></em>
+						</div>
+						<div class="col-xs-8 text-left">
+							<%= this.records[i].description %>
+						</div>
+						
+						<% } else { %>
+						<div class="col-xs-12 text-left">
+							<%= this.records[i].description %>
+						</div>
+						<% } %>
+					</div>
+					 
 				</div>
 				<% } %>
 			</section>
 			
 		
 		</div>
-		<div class="panel-footer"  style="padding:0;">
-			<button class="btn btn-default"><i class="fa fa-plus"></i> New Record</button>
+		<div class="panel-footer" style="padding:0;"   >
+			
+			<!-- Split button -->
+			<div class="btn-group dropup" style="width:100%" id="order-by-controls" >
+				<button class="btn btn-default new-input-btn" type="button" data-type="<%= this.type %>" ><i class="fa fa-plus"></i> New Record</button>
+				<button type="button" class="btn btn-default dropdown-toggle" id="order-by-menu-btn"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				
+					
+					<span class="caret pull-right" style="margin-top:7px;" ></span>	
+					
+					<span id="order-by-label" >
+						Name
+					</span>
+				</button>
+				<ul class="dropdown-menu" id="order-by-menu"  style="left:110px;">
+					<li><a href="#" data-col="name">Name</a></li>
+					<li><a href="#" data-col="description">Description</a></li>
+					<li><a href="#" data-col="dateIn">Date Created</a></li>
+					<li><a href="#" data-col="dateEdited">Date Edited</a></li>
+				</ul>
+				
+				<button class="btn btn-default" type="button" id="order-by" >
+					<i class="fa fa-sort-amount-asc"></i>
+				</button>
+			</div>
+			
+			
 		</div>
 	</div>
 	
@@ -158,7 +249,6 @@
 					{% endfor %}
 				{% endfor %}
 			</section>
-		
 		</div>
 		<div class="panel-footer"  style="padding:0;">
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -179,6 +269,49 @@
 				</label>
 			</div>
 		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-panels-list">
+	<![CDATA[
+	
+	
+	
+	<div class="clearfix"></div>
+	
+	<div class="panel panel-fixed" style="margin-top:3px;">
+		<div class="panel-body nicescroll">
+			<section class="row-preview" id="mockup-rows" style="padding-bottom:20px;">
+				
+				<h3>Panels</h3>
+				<div class="panel" data-draggable='<div class="panel-heading built content-area"></div><div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
+					<div class="panel-m-heading m-built">Heading (built)</div>
+					<div class="panel-m-body">Body</div>
+					<div class="panel-m-footer">Footer</div>
+				</div>
+				<div class="panel" data-draggable='<div class="panel-heading content-area"></div><div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
+					<div class="panel-m-heading">Heading</div>
+					<div class="panel-m-body">Body</div>
+					<div class="panel-m-footer">Footer</div>
+				</div>
+				<div class="panel" data-draggable='<div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
+					<div class="panel-m-body">Body</div>
+					<div class="panel-m-footer">Footer</div>
+				</div>
+				
+				<div class="panel" data-draggable='<div class="panel-body content-area"></div>'>
+					<div class="panel-m-body">Body</div>
+				</div>
+			</section>
+		
+		</div>
+		
 	</div>
 	
 	
@@ -214,5 +347,98 @@
 	
 	
 	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-modal-input-form">
+	<![CDATA[
+	
+	
+	<form action="#" id="form-input-details">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><% if(this.ID){ %>Edit Record<% } else { %>Add Record<% } %></h4>
+			</div>
+			<div class="modal-body form-horizontal" style="padding:30px 10px 10px 10px;">
+				<div class="form-group">
+					<label for="module-name" class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-10">
+						<input type="text" name="module-name"  class="form-control" id="module-name" placeholder="Input Name" value="<%= this.name %>">
+						<span id="helpBlock" class="help-block text-small">Field name, the index for the backend to listen to for inserting into the database <br><em>$_POST['&lt; this value &gt;']</em>
+						</span>
+					</div>
+					<input type="hidden" id="module-type" name="module-type" value="<%= this.module %>" />
+				</div>
+				<div class="form-group">
+					<label for="module-description" class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-10">
+						<input type="text" name="module-description"  class="form-control" id="module-description" placeholder="Input identifier" value="<%= this.description %>">
+						<span id="helpBlock" class="help-block text-small">This gets used to easily identify the item in the lists. <br><em>Doesn't change how it gets displayed</em>
+						</span>
+					</div>
+					<input type="hidden" id="module-type" name="module-type" value="<%= this.module %>" />
+				</div>
+				
+				<div class="form-group">
+					<label for="module-required_text" class="col-sm-2 control-label">Required Text</label>
+					<div class="col-sm-10">
+						<input type="text" name="module-required_text"  class="form-control" id="module-required_text" placeholder="Required Text" value="<%= this.required_text||'' %>">
+						<span id="helpBlock" class="help-block text-small">
+							When something is entered here and the user submits the content form and the value for this field is blank the form will highlight the field and show an error.
+						</span>
+					</div>
+					<input type="hidden" id="module-type" name="module-type" value="<%= this.module %>" />
+				</div>
+				
+				
+				<div class="panel yellow">
+					<div class="panel-heading built">Data 
+					<div class="panel-tools">used to attatch data for this input block</div>
+					</div>
+					<div class="panel-body form-horizontal">
+					
+					</div>
+					
+				</div>
+				
+				<%= this.html %>
+				
+				<div class="clearfix"></div>
+				
+				
+				
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</form>
+	
+	
+	
+	
+	]]>
+</script>
+<script type="text/x-jqote-template" id="template-toolbar-heading">
+	<![CDATA[
+	
+	<% if(this.details.ID==""){ %>
+	<h2 class="font-light">
+		Content Types
+	</h2>
+	<small>Create a new content type</small>
+	
+	<% } else { %>
+	<h2 class="font-light">
+		<small>Content Types</small>
+		- <%= this.details.label %>
+	</h2>
+	<small>Last edited <%= this.details.edited_datein %> by <%= this.details.edited_fullname %></small>
+	
+	<% } %>
 	]]>
 </script>

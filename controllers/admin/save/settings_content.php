@@ -38,7 +38,59 @@ class settings_content extends _ {
 		
 		return $GLOBALS["output"]['data'] = $return;
 	}
-	
+	function input_save(){
+		
+		$reservedFieldNames = array("heading","datein","typeID","data");
+		
+		
+		$result = array();
+		$ID = isset($_REQUEST['ID'])?$_REQUEST['ID']:"";
+		
+		$values = array(
+				"name" => $this->post("module-name",true),
+				"description" => $this->post("module-description",true),
+				"module" => $this->post("module-type",true),
+				"required_text" => $this->post("module-required_text"),
+		);
+		
+		$post = $_POST;
+		
+		
+		$data = array();
+		foreach($post as $k=>$v){
+			if (!in_array($k,array("module-name","module-description","module-type","module-required_text"))){
+				
+				$data[$k] = $v;
+			}
+		}
+		
+		if (in_array($values["name"], $reservedFieldNames)){
+			$this->errors["module-name"] = $values["name"]." is a reserved field name - reserved names (".implode(", ",$reservedFieldNames).")";
+		}
+		
+		
+		$values['data'] = $data;
+		
+		if ($ID!=""){
+			$values['dateEdited'] = date("Y-m-d H:i:s");
+		}
+		//test_array(array($values,$this->errors)); 
+		
+		
+		
+		if (count($this->errors)==0){
+			
+			$ID = models\input_modules::_save($ID,$values);
+			
+			
+		}
+		$return = array(
+				"ID" => $ID,
+				"errors" => $this->errors
+		);
+		
+		return $GLOBALS["output"]['data'] = $return;
+	}
 	
 	
 }

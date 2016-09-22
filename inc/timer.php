@@ -67,7 +67,7 @@ class timer {
 				
 				
 				
-				$t = $this->endTimer - $this->startTimer;
+				$t = self::shortenTimer($this->endTimer - $this->startTimer);
 				$GLOBALS["models"][$class]['m'][$method]['c'] = $GLOBALS["models"][$class]['m'][$method]['c'] + 1;
 				$GLOBALS["models"][$class]['m'][$method]['t'] = $GLOBALS["models"][$class]['m'][$method]['t'] + $t;
 				$GLOBALS["models"][$class]['t'] = isset($GLOBALS["models"][$class]['t'])?$GLOBALS["models"][$class]['t']:0;
@@ -125,7 +125,7 @@ class timer {
 				$str = ($msg) ? $msg . ": " : "";
 				array_push($GLOBALS['timer'], array( "msg"=> $str,
 					                            "arg"=> $arguments,
-					                            "tim"=> ($this->endTimer - $this->startTimer)
+					                            "tim"=> self::shortenTimer(($this->endTimer - $this->startTimer))
 				                            )
 				);
 			}
@@ -133,6 +133,9 @@ class timer {
 		}
 
 
+	}
+	static public function shortenTimer($time){
+		return number_format((float)$time, 5, '.', '');
 	}
 }
 

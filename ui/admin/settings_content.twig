@@ -11,11 +11,20 @@
 				
 				</ol>
 			</div>
-			<div class="pull-left">
+			<div class="pull-left" id="toolbar-heading" >
+				{% if data['ID']=="" %}
+					<h2 class="font-light">
+						Content Types
+					</h2>
+					<small>Create a new content type</small>
+				
+				{% else %}
 				<h2 class="font-light">
-					Content Types
+					<small>Content Types</small>
+					- {{ data['label'] }}
 				</h2>
-				<small>Content type administration</small>
+				<small>Last edited {{ data['edited_datein'] }} by {{ data['edited_fullname'] }}</small>
+				{% endif %}
 			</div>
 		
 		</div>
@@ -28,3 +37,7 @@
 	
 </section>
 </form>
+
+<script type="text/javascript">
+	_data = {{ data|json_encode()|raw() }};
+</script>

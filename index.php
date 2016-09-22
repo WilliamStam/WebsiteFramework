@@ -31,11 +31,17 @@ if (file_exists("config.inc.php")) {
 	require_once('config.inc.php');
 }
 
-$f3->set('AUTOLOAD', './|lib/|controllers/|inc/|/modules/|/app/controllers/');
+$f3->set('AUTOLOAD', './|lib/|controllers/|inc/|/modules/|/app/controllers/|/resources/**/*');
 $f3->set('PLUGINS', 'vendor/bcosca/fatfree/lib/');
 $f3->set('CACHE', true);
 
 $f3->set('DB', new DB\SQL('mysql:host=' . $cfg['DB']['host'] . ';dbname=' . $cfg['DB']['database'] . '', $cfg['DB']['username'], $cfg['DB']['password']));
+
+
+
+//test_array("woof"); 
+
+
 $f3->set('cfg', $cfg);
 $f3->set('DEBUG',3);
 
@@ -48,8 +54,6 @@ $f3->set('TZ', 'Africa/Johannesburg');
 
 $f3->set('TAGS', 'p,br,b,strong,i,italics,em,h1,h2,h3,h4,h5,h6,div,span,blockquote,pre,cite,ol,li,ul');
 
-$f3->set("menu", array());
-$f3->set("company", array());
 
 //$f3->set('ERRORFILE', $errorFile);
 //$f3->set('ONERROR', 'Error::handler');
@@ -78,9 +82,6 @@ $f3->set('_v', $minVersion);
 
 $uID = isset($_SESSION['uID']) ? base64_decode($_SESSION['uID']) : "";
 
-
-
-
 $userO = new \models\user();
 $user = $userO->get($uID);
 if (isset($_GET['auID']) && $user['su']=='1'){
@@ -97,32 +98,48 @@ if ($user['ID']){
 
 
 
+$content_types = models\content_types::getInstance()->getGlobalSetup();
+$f3->set('content_types', $content_types);
+
+//test_array($content_types); 
+
 
 //$f3->set('user', $user);
 $f3->set('session', $SID);
 
 
 
-$f3->route('GET|POST /test', 'controllers\admin\test->page');
+$f3->route('GET|POST /test', function(){
+	
+	// include_once("./resources/inputs/html/input_html.php");
+	
+	$t = "html";
+	
+	$inputO = "\\resources\\inputs\\{$t}\\input_{$t}";
+	$t = new $inputO();
+	
+	
+	
+	
+	
+});
 
 
 
 $f3->route('GET|POST /', 'controllers\front\home->page');
 
 $f3->route('GET|POST /admin', 'controllers\admin\home->page');
+
+
+$f3->route('GET|POST /admin/content/form/@type', 'controllers\admin\content_form->page');
+
+
+
 $f3->route('GET|POST /admin/settings', 'controllers\admin\settings_domain->page');
 $f3->route('GET|POST /admin/settings/content', 'controllers\admin\settings_content->page');
+$f3->route('GET|POST /admin/settings/content/@ID', 'controllers\admin\settings_content->page');
 
 
-
-$f3->route('GET|POST /admin/resources/rows', 'resources\admin\rows\templates->page');
-
-$f3->route("GET|POST /admin/resources/inputs/@input", function ($app, $params) {
-	$app->call("resources\\admin\\inputs\\" . $params['input'] . "\\input->input");
-});
-$f3->route("GET|POST /admin/resources/inputs/@input/@ID", function ($app, $params) {
-	$app->call("resources\\admin\\inputs\\" . $params['input'] . "\\input->input");
-});
 
 
 $f3->route('GET|POST /logout', function ($f3, $params) use ($user) {
@@ -203,7 +220,7 @@ foreach ($models as $model) {
 //test_array($t); 
 
 $models = $t;
-$pageTime = $GLOBALS['page_execute_timer']->stop("Page Execute");
+$pageTime = timer::shortenTimer($GLOBALS['page_execute_timer']->stop("Page Execute"));
 
 $GLOBALS["output"]['timer'] = $GLOBALS['timer'];
 

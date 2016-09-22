@@ -1,0 +1,34 @@
+<div class="normalheader transition animated fadeIn small-header">
+	<div class="panel">
+		<div class="panel-body">
+			
+			<div class="pull-right" id="breadcrumb">
+				<ol class="hbreadcrumb breadcrumb">
+					<li><a href="/admin">Dashboard</a></li>
+					<li><a href="/admin/content/{{ content_type['ID'] }}">Content List</a></li>
+					<li class="active"><a href="/admin/content/form/{{ content_type['ID'] }}">Capture Form</a></li>
+					
+				
+				</ol>
+			</div>
+			<div class="pull-left">
+				<h2 class="font-light">
+					Capture Form
+				</h2>
+				<small>{{ content_type['label'] }}</small>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+<form action="#" id="form">
+<section id="content-area" >
+	
+	
+</section>
+</form>
+
+<script type="text/javascript">
+	var _content_type = {{ content_type|json_encode|raw() }};
+</script>

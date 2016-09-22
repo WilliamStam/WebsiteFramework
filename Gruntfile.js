@@ -2,10 +2,14 @@ var jsfile = [
 	'vendor/components/jquery/jquery.js',
 	'vendor/components/jqueryui/jquery-ui.js',
 	'vendor/twbs/bootstrap-sass/assets/javascripts/bootstrap.min.js' ,
+	'vendor/components/jQote2/jquery.jqote2.js',
+	'ui/_js/_.js'
+];
+
+var jsfile_admin = [
 //	'vendor/components/jquery-hotkeys/jquery.hotkeys.js',
 //	'vendor/components/jquery-mousewheel/jquery.mousewheel.js',
 	'vendor/components/nicescroll/jquery.nicescroll.js',
-	'vendor/components/jQote2/jquery.jqote2.js',
 	'vendor/timrwood/moment/moment.js',
 //	'vendor/components/hideseek/jquery.hideseek.min.js',
 	'vendor/moxiecode/plupload/js/plupload.full.min.js',
@@ -18,7 +22,7 @@ var jsfile = [
 //	'ui/_js/plugins/jquery.ui.touch-punch.min.js',
 //	'ui/_js/plugins/jquery.keepalive.js',
 	'ui/_js/plugins/jquery.plupload.js',
-	'ui/_js/_.js'
+	'ui/admin/_js/_.js'
 ];
 
 module.exports = function (grunt) {
@@ -36,10 +40,10 @@ module.exports = function (grunt) {
 					separator: ';',
 					stripBanners: true,
 					sourceMap :true,
-					sourceMapName : 'ui/base.js.map'
+					sourceMapName : 'ui/javascript.js.map'
 				},
 				src: jsfile,
-				dest: 'ui/base.js',
+				dest: 'ui/javascript.js',
 				nonull: true
 			},
 			js_quick: {
@@ -48,9 +52,31 @@ module.exports = function (grunt) {
 					stripBanners: true
 				},
 				src: jsfile,
-				dest: 'ui/base.js',
+				dest: 'ui/javascript.js',
+				nonull: true
+			},
+			js_admin: {
+				options: {
+					separator: ';',
+					stripBanners: true,
+					sourceMap :true,
+					sourceMapName : 'ui/admin/_javascript.js.map'
+				},
+				src: jsfile_admin,
+				dest: 'ui/admin/_javascript.js',
+				nonull: true
+			},
+			js_admin_quick: {
+				options: {
+					separator: ';',
+					stripBanners: true
+				},
+				src: jsfile_admin,
+				dest: 'ui/admin/_javascript.js',
 				nonull: true
 			}
+			
+			
 		},
 		clean: {
 			map: ["ui/**/*.map"],
@@ -60,14 +86,8 @@ module.exports = function (grunt) {
 			js: {
 				
 				files: {
-					'ui/base.js': 'ui/base.js',
-				}
-			}
-		},
-		less: {
-			style: {
-				files: {
-					"ui/base.css": "ui/less/_base.less",
+					'ui/javascript.js': 'ui/javascript.js',
+					'ui/admin/_javascript.js': 'ui/admin/_javascript.js',
 				}
 			}
 		},
@@ -77,9 +97,9 @@ module.exports = function (grunt) {
 			},
 			style: {
 				files: {
-					"ui/base.css": "ui/_sass/base.scss",
-					"ui/front/base.css": "ui/front/_sass/base.scss",
-					"ui/admin/base.css": "ui/admin/_sass/base.scss",
+					"ui/style.css": "ui/_sass/base.scss",
+					"ui/front/_style.css": "ui/front/_sass/base.scss",
+					"ui/admin/_style.css": "ui/admin/_sass/base.scss",
 				}
 			}
 		},
@@ -91,9 +111,9 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					'ui/base.css': 'ui/base.css',
-					'ui/front/base.css': 'ui/front/base.css',
-					'ui/admin/base.css': 'ui/admin/base.css',
+					'ui/style.css': 'ui/style.css',
+					'ui/front/_style.css': 'ui/front/_style.css',
+					'ui/admin/_style.css': 'ui/admin/_style.css',
 				}
 			}
 		},
@@ -137,12 +157,12 @@ module.exports = function (grunt) {
 	
 	
 	
-	grunt.registerTask('jsmin', ['uglify:js']);
-	grunt.registerTask('js', ['concat:js_quick','clean:map']);
-	grunt.registerTask('jsmap', ['concat:js']);
+	grunt.registerTask('jsmin', ['uglify:js','uglify:js_admin']);
+	grunt.registerTask('js', ['concat:js_quick','concat:js_admin_quick','clean:map']);
+	grunt.registerTask('jsmap', ['concat:js','concat:js_admin']);
 	grunt.registerTask('css', ['sass:style']);
 	grunt.registerTask('autoprefixer', ['postcss:build']);
-	grunt.registerTask('build', ['concat:js','sass:style', 'uglify:js','postcss:build','cssmin','clean:map']);
+	grunt.registerTask('build', ['concat:js','concat:js_admin','sass:style', 'uglify:js','postcss:build','cssmin','clean:map']);
 	grunt.registerTask('default', ['watch']);
 
 };

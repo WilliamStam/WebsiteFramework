@@ -22,7 +22,7 @@
 	
 	<tr style="background-color:#f1f1f1; ">
 		<td><%= this.k %></td>
-		<td style="width: 140px; <% if ( this.t > 0.5 ) { %>color: red;<% } %>"><%= this.t %></td>
+		<td style="width: 90px; <% if ( this.t > 0.5 ) { %>color: red;<% } %>"><%= this.t %></td>
 	</tr>
 	<% for(var i in this.m) { %>
 	<tr class="btn-row-details ">

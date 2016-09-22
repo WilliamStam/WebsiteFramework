@@ -9,7 +9,8 @@ class _ extends \controllers\_ {
 		parent::__construct();
 		$this->user = $this->f3->get("user");
 		$this->cfg = $this->f3->get("cfg");
-
+		$this->params = $this->f3->get("PARAMS");
+		$this->f3->set("__runJSON", false);
 		
 		
 	}

@@ -39,6 +39,20 @@
 
 .navbar-fixed-top {
 	border-bottom: 1px solid #e4e5e7;
+	
+	.dropdown-menu {
+		li.indent {
+			a {
+				.fa {
+					margin-left:-10px ;
+					margin-right:15px;
+					&.fa-plus {
+						margin-left:-13px;
+					}
+				}
+			}
+		}
+	}
 }
 
 

@@ -69,6 +69,13 @@
 					
 					</ul>
 				</li>
+				<li>
+					<a href="/admin/scheduler" {% if page.section =='scheduler' %}class="active"{% endif %}><i class="fa fa-clock-o "></i>
+						<span class="hidden-sm">
+							Scheduler
+						</span>
+					</a>
+				</li>
 			</ul>
 			
 			
@@ -90,7 +97,13 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li {% if page.sub_section =='settings' %}class="active"{% endif %}><a href="/admin/settings"> Domain Settings</a></li>
-						<li {% if page.sub_section =='content' %}class="active"{% endif %}><a href="/admin/settings/content"> Content Types</a></li>
+						<li role="separator" class="divider"></li>
+						<li class="dropdown-header">Content Types</li>
+						<li class="indent {% if page.section =='settings' and page.sub_section == 'content-' %}active{% endif %}"><a href="/admin/settings/content"> <i class="fa fa-plus "></i> New Record</a></li>
+						{% for row in _content_types %}
+							<li class="indent {% if page.section =='settings' and page.sub_section == 'content-'~row['ID'] %}active{% endif %}"><a href="/admin/settings/content/{{ row['ID'] }}"> <i class="fa fa-angle-right"></i> {{ row['label'] }}</a></li>
+						{% endfor %}
+						<li role="separator" class="divider"></li>
 						
 					
 					</ul>
