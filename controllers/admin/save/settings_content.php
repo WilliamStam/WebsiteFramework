@@ -55,6 +55,7 @@ class settings_content extends _ {
 		
 		$post = $_POST;
 		
+		// TODO: make sure name is alpha chars only or dash or underscore. if not then throw an error
 		
 		$data = array();
 		foreach($post as $k=>$v){

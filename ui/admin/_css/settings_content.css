@@ -141,9 +141,14 @@
   font-size: 10px;
   text-align: center;
   border-bottom: 1px dotted #ccc;
-  padding: 0 15px 20px 15px;
-  margin: 0 -15px 20px -15px;
+  padding: 0 15px 15px 15px;
+  margin: 0 -15px 15px -15px;
   background: none; }
+  #mockup-rows .panel .panel-m-heading, #mockup-rows .panel .panel-m-body, #mockup-rows .panel .panel-m-footer {
+    padding: 3px;
+    margin-bottom: -1px; }
+    #mockup-rows .panel .panel-m-heading:first-child, #mockup-rows .panel .panel-m-body:first-child, #mockup-rows .panel .panel-m-footer:first-child {
+      border-top-radius: 5px; }
   #mockup-rows .panel .panel-m-heading {
     padding: 3px; }
     #mockup-rows .panel .panel-m-heading.m-built {

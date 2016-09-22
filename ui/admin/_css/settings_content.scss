@@ -218,12 +218,20 @@ overflow-y:auto;
 		font-size:10px;
 		text-align:center;
 		border-bottom:1px dotted #ccc;
-		padding: 0 15px 20px 15px;
-		margin:0 -15px 20px -15px;
+		padding: 0 15px 15px 15px;
+		margin:0 -15px 15px -15px;
 		background:none;
-		
+		.panel-m-heading, .panel-m-body, .panel-m-footer {
+			padding:3px;
+			margin-bottom:-1px;
+			&:first-child {
+				border-top-radius:5px;
+				
+			}
+		}
 		.panel-m-heading {
 			padding:3px;
+			
 			&.m-built {
 				border:1px solid #e1e1e1;
 			}

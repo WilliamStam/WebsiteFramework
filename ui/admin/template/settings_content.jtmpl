@@ -290,16 +290,25 @@
 			<section class="row-preview" id="mockup-rows" style="padding-bottom:20px;">
 				
 				<h3>Panels</h3>
-				<div class="panel" data-draggable='<div class="panel-heading built content-area"></div><div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
-					<div class="panel-m-heading m-built">Heading (built)</div>
-					<div class="panel-m-body">Body</div>
-					<div class="panel-m-footer">Footer</div>
-				</div>
 				<div class="panel" data-draggable='<div class="panel-heading content-area"></div><div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
 					<div class="panel-m-heading">Heading</div>
 					<div class="panel-m-body">Body</div>
 					<div class="panel-m-footer">Footer</div>
 				</div>
+				<div class="panel" data-draggable='<div class="panel-heading built content-area"></div><div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
+					<div class="panel-m-heading m-built">Heading (built)</div>
+					<div class="panel-m-body">Body</div>
+					<div class="panel-m-footer">Footer</div>
+				</div>
+				<div class="panel" data-draggable='<div class="panel-heading content-area"></div><div class="panel-body content-area"></div>'>
+					<div class="panel-m-heading">Heading</div>
+					<div class="panel-m-body">Body</div>
+				</div>
+				<div class="panel" data-draggable='<div class="panel-heading built content-area"></div><div class="panel-body content-area"></div>'>
+					<div class="panel-m-heading m-built">Heading (built)</div>
+					<div class="panel-m-body">Body</div>
+				</div>
+				
 				<div class="panel" data-draggable='<div class="panel-body content-area"></div><div class="panel-footer content-area"></div>'>
 					<div class="panel-m-body">Body</div>
 					<div class="panel-m-footer">Footer</div>
@@ -365,7 +374,7 @@
 					<label for="module-name" class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-10">
 						<input type="text" name="module-name"  class="form-control" id="module-name" placeholder="Input Name" value="<%= this.name %>">
-						<span id="helpBlock" class="help-block text-small">Field name, the index for the backend to listen to for inserting into the database <br><em>$_POST['&lt; this value &gt;']</em>
+						<span id="helpBlock" class="help-block text-small">Field name, the index for the backend to listen to for inserting into the database <em>$_POST['&lt; this value &gt;']</em> <br>NOTE: name must not contain any spaces or non alpha characters
 						</span>
 					</div>
 					<input type="hidden" id="module-type" name="module-type" value="<%= this.module %>" />
